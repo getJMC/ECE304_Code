@@ -7,6 +7,8 @@ class poly {
 public:
 	poly (string, unsigned int, double []);
 	// you need to add at least two different constructors
+	double FirstDeriv(unsigned int, double);
+	double SecondDeriv(unsigned int, double);
 
 	void printPoly();
 	double val(double);
@@ -34,6 +36,18 @@ double poly::val(double x)
 	return ans;
 }
 
+double poly::FirstDeriv(unsigned int x, double h)
+{
+	double result = (val(x+h) - val(x-h))/(2*h);
+	return result;
+}
+
+double poly::SecondDeriv(unsigned int x, double h)
+{
+	double result = (val(x+h) - 2*val(x) + val(x-h))/(h*h);
+	return result;
+}
+
 void poly::printPoly( )
 {
 	cout<<"polynomial name:"<<name<<endl;
@@ -45,6 +59,7 @@ void poly::printPoly( )
 	cout<<endl;
 }
 
+
 int main (void)
 {
 	double c[3] = {1,3,2};
@@ -52,6 +67,9 @@ int main (void)
 	a.printPoly();
 	cout<<a.val(5) << endl;
 	cout << a.val(-2.0) << endl;
+
+	cout << endl << "First Derivative: " << a.FirstDeriv(2,0.5) << endl;
+	cout << "Second Derivative: " << a.SecondDeriv(2,0.5) << endl;
 	system ("pause");
 	return 0;
 }
